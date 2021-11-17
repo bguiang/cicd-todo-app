@@ -11,5 +11,4 @@ public class Task {
 	public Object getName() {
 		return name;
 	}
-
 }

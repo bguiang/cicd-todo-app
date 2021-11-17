@@ -11,15 +11,11 @@ import org.junit.jupiter.api.Test;
 import com.example.cicdtodoapp.models.Task;
 
 class TaskControllerTest {
+
+	// Test naming convention: methodname_action_result
 	
-
-	@BeforeEach
-	void setUp() throws Exception {
-		
-	}
-
 	@Test
-	void getTasks() {
+	void getTask_noTasks_retrieveEmptyList() {
 		// Given
 		TaskController underTest = new TaskController();
 		
@@ -32,7 +28,7 @@ class TaskControllerTest {
 	}
 	
 	@Test
-	void addTask() {
+	void addTask_singleTask_retrieveOnlyTheSameTask() {
 		// Given
 		TaskController underTest = new TaskController();
 		String taskName = "Say hello world";
@@ -51,7 +47,7 @@ class TaskControllerTest {
 	}
 
 	@Test
-	void addTasks() {
+	void addTask_twoConsecutiveTasks_retrievedInSameOrder() {
 		// Given
 		TaskController underTest = new TaskController();
 		Task task1 = new Task("My first task");
