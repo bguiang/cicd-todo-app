@@ -24,37 +24,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    #- name: Build and Push Docker Image
-    #- run: | # pipe lets you add multiple lines of command
-    #    docker login cred
-    #    docker build...
-    
-    #The Ubuntu Linux machine the build runs on comes with Docker by default
-    # The building and pushing of docker image can be manually as seen above
-    # But there are already existing github actions for that 
-    # https://github.com/docker/build-push-action
-    # Marketplace Page: https://github.com/marketplace/actions/build-and-push-docker-images
-docker:
-    needs: build # Run Build before Building and Pushing to Docker
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: bguiang/cicd-todo-app:latest
+      
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: bguiang/cicd-todo-app
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
