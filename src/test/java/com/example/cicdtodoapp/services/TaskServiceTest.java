@@ -1,23 +1,22 @@
-package com.example.cicdtodoapp.controllers;
+package com.example.cicdtodoapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.example.cicdtodoapp.models.Task;
 
-class TaskControllerTest {
+class TaskServiceTest {
 
 	// Test naming convention: methodname_action_result
 	
 	@Test
 	void getTask_noTasks_returnsEmptyList() {
 		// Given
-		TaskController underTest = new TaskController();
+		TaskService underTest = new TaskService();
 		
 		// When
 		List<Task> tasks = underTest.getTasks();
@@ -30,7 +29,7 @@ class TaskControllerTest {
 	@Test
 	void addTask_singleTask_savesTheTask() {
 		// Given
-		TaskController underTest = new TaskController();
+		TaskService underTest = new TaskService();
 		String taskName = "Say hello world";
 		Task task = new Task(taskName);
 		
@@ -49,7 +48,7 @@ class TaskControllerTest {
 	@Test
 	void addTask_twoConsecutiveTasks_savesTasksInSameOrder() {
 		// Given
-		TaskController underTest = new TaskController();
+		TaskService underTest = new TaskService();
 		Task task1 = new Task("My first task");
 		Task task2 = new Task("My second task");
 		
@@ -63,4 +62,5 @@ class TaskControllerTest {
 		assertEquals("My first task", tasks.get(0).getName());
 		assertEquals("My second task", tasks.get(1).getName());
 	}
+
 }
