@@ -15,7 +15,7 @@ class TaskControllerTest {
 	// Test naming convention: methodname_action_result
 	
 	@Test
-	void getTask_noTasks_retrieveEmptyList() {
+	void getTask_noTasks_returnsEmptyList() {
 		// Given
 		TaskController underTest = new TaskController();
 		
@@ -28,7 +28,7 @@ class TaskControllerTest {
 	}
 	
 	@Test
-	void addTask_singleTask_retrieveOnlyTheSameTask() {
+	void addTask_singleTask_savesTheTask() {
 		// Given
 		TaskController underTest = new TaskController();
 		String taskName = "Say hello world";
@@ -47,7 +47,7 @@ class TaskControllerTest {
 	}
 
 	@Test
-	void addTask_twoConsecutiveTasks_retrievedInSameOrder() {
+	void addTask_twoConsecutiveTasks_savesTasksInSameOrder() {
 		// Given
 		TaskController underTest = new TaskController();
 		Task task1 = new Task("My first task");
