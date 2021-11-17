@@ -35,10 +35,10 @@ jobs:
     # But there are already existing github actions for that 
     # https://github.com/docker/build-push-action
     # Marketplace Page: https://github.com/marketplace/actions/build-and-push-docker-images
-docker:
-    needs: build # Run Build before Building and Pushing to Docker
-    runs-on: ubuntu-latest
-    steps:
+#docker:
+    #needs: build # Run Build before Building and Pushing to Docker
+    #runs-on: ubuntu-latest
+    #steps:
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
