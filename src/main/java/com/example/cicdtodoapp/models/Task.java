@@ -4,11 +4,17 @@ public class Task {
 
 	private String name;
 	
+	public Task() {}
+	
 	public Task(String name) {
 		this.name = name;
 	}
 
-	public Object getName() {
+	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
