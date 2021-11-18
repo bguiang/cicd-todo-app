@@ -1,6 +1,8 @@
 # cicd-todo-app
 A sample app used for learning GitHub actions, CI/CD, and TDD. The app exposes 4 REST endpoints for CRUD operations on Tasks
 
+The CI currently builds and runs the tests when merging or pushing to `master`. If the tests pass Github Actions builds a docker image that is pushed to a dockerhub repository  (https://hub.docker.com/r/bguiang/cicd-todo-app)
+
 **Get Tasks**
 ----
   Returns list of tasks
