@@ -19,4 +19,9 @@ public class TaskService {
 		task.setId(tasks.size() + 1); // generate ID
 		tasks.add(task);
 	}
+
+	public void deleteTask(long id) {
+		// TODO: we could remove the i-1th element but it would be much easier if we used the database to generate the ids
+		
+	}
 }

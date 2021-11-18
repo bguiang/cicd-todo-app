@@ -28,7 +28,7 @@ class TaskServiceTest {
 	}
 	
 	@Test
-	void addTask_singleTask_savesTheTask() {
+	void addTask_oneTask_savesTheTask() {
 		// Given
 		TaskService underTest = new TaskService();
 		String taskName = "Say hello world";
@@ -67,4 +67,19 @@ class TaskServiceTest {
 		assertEquals(2L, tasks.get(1).getId());
 	}
 
+	@Test
+	void deleteTask_withOneTask_deletesTaskWithId() {
+		// Given
+		TaskService underTest = new TaskService();
+		Task task1 = new Task("My first task");
+		long id = 1;
+		
+		// When
+		underTest.addTask(task1);
+		underTest.deleteTask(id);
+		List<Task> tasks = underTest.getTasks();
+		
+		// Then
+		assertEquals(0, tasks.size());
+	}
 }
