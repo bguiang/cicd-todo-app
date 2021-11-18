@@ -99,5 +99,5 @@ A sample app used for learning GitHub actions, CI/CD, and TDD. The app exposes 4
  
 * **Error Response:**
 
-  * **Code:** 404 <br />
-    **Content:** `{ error : "Not Found" }`
+  * **Code:** 500 <br />
+    **Content:** `{ error : "Internal Server Error" }`

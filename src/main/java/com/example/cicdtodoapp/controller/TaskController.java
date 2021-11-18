@@ -3,7 +3,9 @@ package com.example.cicdtodoapp.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +35,11 @@ public class TaskController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void addTask(@RequestBody Task task) {
 		taskService.addTask(task);
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public void deleteTask(@PathVariable long id) {
+		taskService.deleteTask(id);
 	}
 }
