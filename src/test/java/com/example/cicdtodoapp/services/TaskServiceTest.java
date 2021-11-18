@@ -2,84 +2,67 @@ package com.example.cicdtodoapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import com.example.cicdtodoapp.models.Task;
+import com.example.cicdtodoapp.repository.TaskRepository;
 import com.example.cicdtodoapp.service.TaskService;
 
+//Test naming convention: methodname_action_result
 class TaskServiceTest {
 
-	// Test naming convention: methodname_action_result
+	private TaskService underTest;
+	private TaskRepository taskRepository;
+	
+	@BeforeEach
+	private void setup() {
+		taskRepository = Mockito.mock(TaskRepository.class);
+		underTest = new TaskService(taskRepository);
+	}
 	
 	@Test
-	void getTask_noTasks_returnsEmptyList() {
+	void getTask_anyTaskList_returnsTasksFromRepository() {
 		// Given
-		TaskService underTest = new TaskService();
+		List<Task> anyTaskList = new ArrayList<>();
 		
 		// When
+		when(taskRepository.findAll()).thenReturn(anyTaskList);
 		List<Task> tasks = underTest.getTasks();
 		
 		// Then
-		assertNotNull(tasks);
-		assertEquals(0, tasks.size());
+		assertEquals(anyTaskList, tasks);
 	}
 	
 	@Test
 	void addTask_oneTask_savesTheTask() {
 		// Given
-		TaskService underTest = new TaskService();
 		String taskName = "Say hello world";
 		Task task = new Task(taskName);
+		List<Task> tasks = new ArrayList<>();
+		tasks.add(task);
 		
 		// When
 		underTest.addTask(task);
 		
 		// Then
-		List<Task> tasks = underTest.getTasks();
-		assertNotNull(tasks);
-		assertEquals(1, tasks.size());
-		
-		Task t = tasks.get(0);
-		assertEquals("Say hello world", t.getName());
-		assertEquals(1L, t.getId());
+		verify(taskRepository).save(task);
 	}
 
 	@Test
-	void addTask_twoConsecutiveTasks_savesTasksInSameOrder() {
+	void deleteTask_anyId_deletesTaskWithTheSameId() {
 		// Given
-		TaskService underTest = new TaskService();
-		Task task1 = new Task("My first task");
-		Task task2 = new Task("My second task");
-		
 		// When
-		underTest.addTask(task1);
-		underTest.addTask(task2);
+		underTest.deleteTask(5l);
 		
 		// Then
-		List<Task> tasks = underTest.getTasks();
-		assertEquals(2, tasks.size());
-		assertEquals("My first task", tasks.get(0).getName());
-		assertEquals(1L, tasks.get(0).getId());
-		assertEquals("My second task", tasks.get(1).getName());
-		assertEquals(2L, tasks.get(1).getId());
-	}
-
-	@Test
-	void deleteTask_withOneTask_deletesTaskWithId() {
-		// Given
-		TaskService underTest = new TaskService();
-		Task task1 = new Task("My first task");
-		long id = 1;
-		
-		// When
-		underTest.addTask(task1);
-		underTest.deleteTask(id);
-		List<Task> tasks = underTest.getTasks();
-		
-		// Then
-		assertEquals(0, tasks.size());
+		verify(taskRepository).deleteById(5l);
 	}
 }
