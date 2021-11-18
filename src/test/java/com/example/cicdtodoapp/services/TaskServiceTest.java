@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.example.cicdtodoapp.models.Task;
+import com.example.cicdtodoapp.service.TaskService;
 
 class TaskServiceTest {
 
@@ -43,6 +44,7 @@ class TaskServiceTest {
 		
 		Task t = tasks.get(0);
 		assertEquals("Say hello world", t.getName());
+		assertEquals(1L, t.getId());
 	}
 
 	@Test
@@ -60,7 +62,9 @@ class TaskServiceTest {
 		List<Task> tasks = underTest.getTasks();
 		assertEquals(2, tasks.size());
 		assertEquals("My first task", tasks.get(0).getName());
+		assertEquals(1L, tasks.get(0).getId());
 		assertEquals("My second task", tasks.get(1).getName());
+		assertEquals(2L, tasks.get(1).getId());
 	}
 
 }

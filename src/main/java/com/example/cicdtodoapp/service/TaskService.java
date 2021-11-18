@@ -1,4 +1,4 @@
-package com.example.cicdtodoapp.services;
+package com.example.cicdtodoapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class TaskService {
 	}
 	
 	public void addTask(Task task) {
+		task.setId(tasks.size() + 1); // generate ID
 		tasks.add(task);
 	}
 }

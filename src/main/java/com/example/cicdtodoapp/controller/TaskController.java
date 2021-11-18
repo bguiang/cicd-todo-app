@@ -1,6 +1,5 @@
-package com.example.cicdtodoapp.controllers;
+package com.example.cicdtodoapp.controller;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cicdtodoapp.models.Task;
-import com.example.cicdtodoapp.services.TaskService;
+import com.example.cicdtodoapp.service.TaskService;
 
 @RestController
 @RequestMapping("/api/v1/tasks")
