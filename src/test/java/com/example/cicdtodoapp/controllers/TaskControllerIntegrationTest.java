@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,6 +79,26 @@ class TaskControllerIntegrationTest {
 		
 		// Then
 		verify(taskService).deleteTask(5L);
+	}
+	
+	@Test
+	void updateTask_validTaskWithId_updatesTask() throws Exception {
+		// Given
+		Task task = new Task("Hello");
+		
+		// When
+		mvc.perform(put("/api/v1/tasks/5")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(asJsonString(task))
+		)
+		.andExpect(status().isOk());
+		
+		// Then
+		ArgumentCaptor<Task> taskCaptor = ArgumentCaptor.forClass(Task.class);
+		verify(taskService).updateTask(Mockito.eq(5L), taskCaptor.capture());
+		
+		Task updated = taskCaptor.getValue();
+		assertEquals(task.getName(), updated.getName());
 	}
 	
 	public static String asJsonString(final Object obj) {

@@ -21,25 +21,6 @@ class TaskRepositoryIntegrationTest {
 	@Autowired
 	private TaskRepository underTest;
 	
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
-	// We want to be able to add, retrieve, and delete tasks
-	// autogenerate ids
-	
 	@Test
 	void save_oneTask_savesTaskWithGeneratedId() {
 		// Given

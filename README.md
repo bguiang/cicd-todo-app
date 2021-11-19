@@ -31,7 +31,7 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
 
 **Add Task**
 ----
-  Adds a task to the list
+  Adds a task to the list. Note: IDs passed in the request body will be ignored.
 
 * **URL**
 
@@ -51,12 +51,15 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
  
 * **Error Response:**
 
+  * **Code:** 400 <br />
+    **Content:** `{ error : "Bad Request" }`
+    
   * **Code:** 404 <br />
     **Content:** `{ error : "Not Found" }`
 
 **Update Task**
 ----
-  Updates an existing task
+  Updates an existing task. Note: IDs passed in the request body will be ignored.
 
 * **URL**
 
@@ -66,9 +69,16 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
 
   `PUT`
 
-* **Data Params**
+*  **URL Params**
 
-  `id=[Integer]`
+   **Required:**
+ 
+   `id=[integer]`
+  
+* **Data Params**
+	**Required:**
+
+  `{name: "task name"}`
 
 * **Success Response:**
 
@@ -76,8 +86,11 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
  
 * **Error Response:**
 
-  * **Code:** 404 <br />
-    **Content:** `{ error : "Not Found" }`
+  * **Code:** 400 <br />
+    **Content:** `{ error : "Bad Request" }`
+    
+  * **Code:** 500 <br />
+    **Content:** `{ error : "Internal Server Error" }`
     
 **Delete Task**
 ----
@@ -91,7 +104,7 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
 
   `DELETE`
 
-* **Data Params**
+* **URL Params**
 
   `id=[Integer]`
 
@@ -100,6 +113,6 @@ The CI currently builds and runs the tests when merging or pushing to `master`. 
   * **Code:** 200 <br />
  
 * **Error Response:**
-
+    
   * **Code:** 500 <br />
     **Content:** `{ error : "Internal Server Error" }`
