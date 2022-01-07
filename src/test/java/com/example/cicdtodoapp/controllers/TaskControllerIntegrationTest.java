@@ -75,7 +75,7 @@ class TaskControllerIntegrationTest {
 		
 		// When
 		mvc.perform(delete("/api/v1/tasks/5"))
-		.andExpect(status().isOk());
+		.andExpect(!status().isOk());
 		
 		// Then
 		verify(taskService).deleteTask(5L);
