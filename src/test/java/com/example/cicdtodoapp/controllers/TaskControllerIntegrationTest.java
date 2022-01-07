@@ -95,7 +95,7 @@ class TaskControllerIntegrationTest {
 		
 		// Then
 		ArgumentCaptor<Task> taskCaptor = ArgumentCaptor.forClass(Task.class);
-		verify(taskService).updateTask(Mockito.eq(5L), taskCaptor.capture());
+		verify(taskService).updateTask(Mockito.eq(6L), taskCaptor.capture());
 		
 		Task updated = taskCaptor.getValue();
 		assertEquals(task.getName(), updated.getName());
