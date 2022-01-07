@@ -64,7 +64,7 @@ class TaskServiceTest {
 		
 		Task capturedSaveTaskParam = taskCaptor.getValue();
 		assertEquals("Say hello world", capturedSaveTaskParam.getName());
-		assertEquals(0, capturedSaveTaskParam.getId());
+		assertEquals(1, capturedSaveTaskParam.getId());
 	}
 
 	@Test
